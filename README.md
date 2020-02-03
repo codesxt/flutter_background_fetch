@@ -206,7 +206,8 @@ class _MyAppState extends State<MyApp> {
 ### iOS
 
 #### New `BGTaskScheduler` API for iOS 13+
-- The old command *Debug->Simulate Background Fetch* no longer works with new `BGTaskSCheduler` API:
+- The old command *Debug->Simulate Background Fetch* no longer works with new `BGTaskSCheduler` API. 
+- At the time of writing, the new task simulator does not yet work in Simulator; Only real devices.
 - See Apple docs [Starting and Terminating Tasks During Development](https://developer.apple.com/documentation/backgroundtasks/starting_and_terminating_tasks_during_development?language=objc)
 - After running your app in XCode, Click the `[||]` button to initiate a *Breakpoint*.
 
