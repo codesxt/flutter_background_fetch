@@ -11,15 +11,15 @@
 
 
 ## Configure `Info.plist`
-- Open your `Info.plist` and the key *"Permitted background task scheduler identifiers"*
+1. Open your `Info.plist` and the key *"Permitted background task scheduler identifiers"*
 
 ![](https://dl.dropboxusercontent.com/s/t5xfgah2gghqtws/ios-setup-permitted-identifiers.png?dl=1)
 
-- The identifier `com.transistorsoft.fetch` is **required**.
+2. Add the **required identifier `com.transistorsoft.fetch`**.
 
 ![](https://dl.dropboxusercontent.com/s/kwdio2rr256d852/ios-setup-permitted-identifiers-add.png?dl=1)
 
-- If you intend to execute your own custom tasks via `BackgroundFetch.scheduleTask`, you must add those custom identifiers as well.  For example, if you intend to execute a custom task named `com.foo.customtask`, you must add the identifier `com.foo.customtask` to your *"Permitted background task scheduler identifiers"*, as well.
+3. If you intend to execute your own custom tasks via `BackgroundFetch.scheduleTask`, you must add those custom identifiers as well.  For example, if you intend to execute a custom task named `com.foo.customtask`, you must add the identifier `com.foo.customtask` to your *"Permitted background task scheduler identifiers"*, as well.
 
 ```dart
 BackgroundFetch.scheduleTask(TaskConfig(
