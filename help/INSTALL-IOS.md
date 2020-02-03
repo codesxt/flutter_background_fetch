@@ -12,6 +12,7 @@
 
 ## Configure `Info.plist`
 - Open your `Info.plist` and the key *"Permitted background task scheduler identifiers"*
+
 ![](https://dl.dropboxusercontent.com/s/t5xfgah2gghqtws/ios-setup-permitted-identifiers.png?dl=1)
 
 - The identifier `com.transistorsoft.fetch` is **required**.
