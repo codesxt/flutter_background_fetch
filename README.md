@@ -220,8 +220,7 @@ BackgroundFetch.configure(BackgroundFetchConfig(
     default:
       print("Default fetch task");
   }
-  // IMPORTANT:  You must signal completion of your task or the OS can punish your app
-  // for taking too long in the background.
+  // Finish, providing received taskId.
   BackgroundFetch.finish(taskId);
 });
 
