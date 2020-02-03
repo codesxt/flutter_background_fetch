@@ -205,6 +205,7 @@ class _MyAppState extends State<MyApp> {
 In addition to the default background-fetch task defined by `BackgroundFetch.configure`, you may also execute your own arbitrary "oneshot" or periodic tasks (iOS requires additional [Setup Instructions](./help/INSTALL-IOS.md)).  However, all events will be fired into the Callback provivded to **`BackgroundFetch#configure`**:
 
 ```dart
+// Step 1:  Configure BackgroundFetch as usual.
 BackgroundFetch.configure(BackgroundFetchConfig(
   minimumFetchInterval: 15  
 ), (String taskId) async {
@@ -224,7 +225,7 @@ BackgroundFetch.configure(BackgroundFetchConfig(
   BackgroundFetch.finish(taskId);
 });
 
-// Schedule a custom "oneshot" task "com.foo.customtask" to execute 5000ms from now.
+// Step 2:  Schedule a custom "oneshot" task "com.foo.customtask" to execute 5000ms from now.
 BackgroundFetch.scheduleTask(TaskConfig(
   taskId: "com.foo.customtask",
   delay: 5000  // <-- milliseconds
