@@ -211,7 +211,7 @@ class _MyAppState extends State<MyApp> {
 
 ![](https://dl.dropboxusercontent.com/s/zr7w3g8ivf71u32/ios-simulate-bgtask-pause.png?dl=1)
 
-- In the console `(lldb)`, paste the following command:
+- In the console `(lldb)`, paste the following command (**Note:**  use cursor up/down keys to cycle through previously run commands):
 ```obj-c
 e -l objc -- (void)[[BGTaskScheduler sharedScheduler] _simulateLaunchForTaskWithIdentifier:@"com.transistorsoft.fetch"]
 ```
