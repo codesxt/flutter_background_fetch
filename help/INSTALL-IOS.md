@@ -12,11 +12,13 @@
 
 ## Configure `Info.plist`
 - Open your `Info.plist` and the key *"Permitted background task scheduler identifiers"*
-- The identifier `com.transistorsoft.fetch` is **required**.
-- If you intend to execute your own custom tasks via `BackgroundFetch.scheduleTask`, you must add those custom identifiers as well.
+![](https://dl.dropboxusercontent.com/s/t5xfgah2gghqtws/ios-setup-permitted-identifiers.png?dl=1)
 
-![](https://dl.dropboxusercontent.com/s/9vik5kxoklk63ob/ios-setup-background-modes.png?dl=1)
+- The identifier `com.transistorsoft.fetch` is **required**.
+
 ![](https://dl.dropboxusercontent.com/s/kwdio2rr256d852/ios-setup-permitted-identifiers-add.png?dl=1)
+
+- If you intend to execute your own custom tasks via `BackgroundFetch.scheduleTask`, you must add those custom identifiers as well.
 
 For example, if you intend to execute a custom task named `com.foo.customtask`, you must add the identifier `com.foo.customtask` to your `Info.plist`.
 
