@@ -8,8 +8,10 @@ By [**Transistor Software**](http://transistorsoft.com), creators of [**Flutter 
 
 Background Fetch is a *very* simple plugin which will awaken an app in the background about **every 15 minutes**, providing a short period of background running-time.  This plugin will execute your provided `callbackFn` whenever a background-fetch event occurs.
 
+### iOS
 There is **no way** to increase the rate which a fetch-event occurs and this plugin sets the rate to the most frequent possible &mdash; you will **never** receive an event faster than **15 minutes**.  The operating-system will automatically throttle the rate the background-fetch events occur based upon usage patterns.  Eg: if user hasn't turned on their phone for a long period of time, fetch events will occur less frequently.
 
+### Android
 The Android plugin provides a [Headless](https://pub.dartlang.org/documentation/background_fetch/latest/background_fetch/BackgroundFetchConfig/enableHeadless.html) implementation allowing you to continue handling events even after app-termination.
 
 # Contents
@@ -55,9 +57,9 @@ import 'package:flutter/services.dart';
 import 'package:background_fetch/background_fetch.dart';
 
 /// This "Headless Task" is run when app is terminated.
-void backgroundFetchHeadlessTask() async {
+void backgroundFetchHeadlessTask(String taskId) async {
   print('[BackgroundFetch] Headless event received.');
-  BackgroundFetch.finish();
+  BackgroundFetch.finish(taskId);
 }
 
 void main() {
@@ -98,15 +100,15 @@ class _MyAppState extends State<MyApp> {
         requiresStorageNotLow: false,
         requiresDeviceIdle: false,
         requiredNetworkType: BackgroundFetchConfig.NETWORK_TYPE_NONE
-    ), () async {
+    ), (String taskId) async {
       // This is the fetch-event callback.
       print('[BackgroundFetch] Event received');
       setState(() {
         _events.insert(0, new DateTime.now());
       });
-      // IMPORTANT:  You must signal completion of your fetch task or the OS can punish your app
+      // IMPORTANT:  You must signal completion of your task or the OS can punish your app
       // for taking too long in the background.
-      BackgroundFetch.finish();
+      BackgroundFetch.finish(taskId);
     }).then((int status) {
       print('[BackgroundFetch] configure success: $status');
       setState(() {
@@ -203,6 +205,19 @@ class _MyAppState extends State<MyApp> {
 
 ### iOS
 
+#### New `BGTaskScheduler` API
+- See Apple docs [Starting and Terminating Tasks During Development](https://developer.apple.com/documentation/backgroundtasks/starting_and_terminating_tasks_during_development?language=objc)
+- After running your app in XCode, Click the `[||]` button to initiate a *Breakpoint*.
+![](https://dl.dropboxusercontent.com/s/zr7w3g8ivf71u32/ios-simulate-bgtask-pause.png?dl=1)
+- In the console `(lldb)`, paste the following command:
+```obj-c
+e -l objc -- (void)[[BGTaskScheduler sharedScheduler] _simulateLaunchForTaskWithIdentifier:@"com.transistorsoft.fetch"]
+```
+![](https://dl.dropboxusercontent.com/s/87c9uctr1ka3s1e/ios-simulate-bgtask-paste.png?dl=1)
+- Click the `[ > ]` button to continue.
+![](https://dl.dropboxusercontent.com/s/bsv0avap5c2h7ed/ios-simulate-bgtask-play.png?dl=1)
+ 
+#### Old `BackgroundFetch` API
 - Simulate background fetch events in XCode using **`Debug->Simulate Background Fetch`**
 - iOS can take some hours or even days to start a consistently scheduling background-fetch events since iOS schedules fetch events based upon the user's patterns of activity.  If *Simulate Background Fetch* works, your can be **sure** that everything is working fine.  You just need to wait.
 
