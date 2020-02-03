@@ -209,11 +209,13 @@ class _MyAppState extends State<MyApp> {
 - See Apple docs [Starting and Terminating Tasks During Development](https://developer.apple.com/documentation/backgroundtasks/starting_and_terminating_tasks_during_development?language=objc)
 - After running your app in XCode, Click the `[||]` button to initiate a *Breakpoint*.
 ![](https://dl.dropboxusercontent.com/s/zr7w3g8ivf71u32/ios-simulate-bgtask-pause.png?dl=1)
+
 - In the console `(lldb)`, paste the following command:
 ```obj-c
 e -l objc -- (void)[[BGTaskScheduler sharedScheduler] _simulateLaunchForTaskWithIdentifier:@"com.transistorsoft.fetch"]
 ```
 ![](https://dl.dropboxusercontent.com/s/87c9uctr1ka3s1e/ios-simulate-bgtask-paste.png?dl=1)
+
 - Click the `[ > ]` button to continue.
 ![](https://dl.dropboxusercontent.com/s/bsv0avap5c2h7ed/ios-simulate-bgtask-play.png?dl=1)
  
