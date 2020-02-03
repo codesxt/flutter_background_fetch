@@ -32,7 +32,7 @@ BackgroundFetch.scheduleTask(TaskConfig(
 
 **If** you added custom *Background Processing* identifier(s) in your `Info.plist` and intend to use **`BackgroundFetch.scheduleTask`**, you must register those custom identifier(s) in your **`AppDelegate`** method **`didFinishLaunchingWithOptions`**:
 
-__Note:__ The SDK *automatically* registers its required fetch-task **`com.transistorsoft.fetch`**.  You need only register **your own** custom task idenfifiers here.
+__Note:__ The SDK *automatically* registers its required fetch-task **`com.transistorsoft.fetch`** &mdash; You need only register **your own** custom task idenfifiers here.
 
 ```obj-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
