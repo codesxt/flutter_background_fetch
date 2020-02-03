@@ -99,10 +99,10 @@ class _MyAppState extends State<MyApp> {
         requiresCharging: false,
         requiresStorageNotLow: false,
         requiresDeviceIdle: false,
-        requiredNetworkType: BackgroundFetchConfig.NETWORK_TYPE_NONE
+        requiredNetworkType: NetworkType.NONE
     ), (String taskId) async {
       // This is the fetch-event callback.
-      print('[BackgroundFetch] Event received');
+      print("[BackgroundFetch] Event received $taskId");
       setState(() {
         _events.insert(0, new DateTime.now());
       });
@@ -197,8 +197,38 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-}
+} 
+```
 
+### Executing Custom Tasks
+
+In addition to the default background-fetch task defined by `BackgroundFetch.configure`, you may also execute your own arbitrary "oneshot" or periodic tasks (iOS requires additional [Setup Instructions](./help/INSTALL-IOS.md)).  However, all events will be fired into the Callback provivded to **`BackgroundFetch#configure`**:
+
+```dart
+BackgroundFetch.configure(BackgroundFetchConfig(
+  minimumFetchInterval: 15  
+), (String taskId) async {
+  // This is the fetch-event callback.
+  print("[BackgroundFetch] taskId: $taskId");
+  
+  // Use a switch statement to route task-handling.
+  switch (taskId) {
+    case 'com.foo.customtask':
+      print("Received custom task");
+      break;
+    default:
+      print("Default fetch task");
+  }
+  // IMPORTANT:  You must signal completion of your task or the OS can punish your app
+  // for taking too long in the background.
+  BackgroundFetch.finish(taskId);
+});
+
+// Schedule a custom "oneshot" task "com.foo.customtask" to execute 5000ms from now.
+BackgroundFetch.scheduleTask(TaskConfig(
+  taskId: "com.foo.customtask",
+  delay: 5000  // <-- milliseconds
+));
 ```
 
 ## 🔷 Debugging
