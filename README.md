@@ -205,7 +205,7 @@ class _MyAppState extends State<MyApp> {
 
 ### iOS
 
-#### New `BGTaskScheduler` API
+#### New `BGTaskScheduler` API for iOS 13+
 - See Apple docs [Starting and Terminating Tasks During Development](https://developer.apple.com/documentation/backgroundtasks/starting_and_terminating_tasks_during_development?language=objc)
 - After running your app in XCode, Click the `[||]` button to initiate a *Breakpoint*.
 ![](https://dl.dropboxusercontent.com/s/zr7w3g8ivf71u32/ios-simulate-bgtask-pause.png?dl=1)
